@@ -2,10 +2,13 @@ import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 
 function allowedUsers(): string[] {
-  return (process.env.ALLOWED_GITHUB_USERS ?? "")
+  const configuredUsers = (process.env.ALLOWED_GITHUB_USERS ?? "")
     .split(",")
     .map((name) => name.trim().toLowerCase())
     .filter(Boolean);
+
+  // Keep production private even before an explicit allowlist is configured.
+  return configuredUsers.length > 0 ? configuredUsers : ["benjistun"];
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
