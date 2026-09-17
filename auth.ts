@@ -12,7 +12,14 @@ function allowedUsers(): string[] {
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [GitHub],
+  secret: process.env.AUTH_SECRET,
+  trustHost: true,
+  providers: [
+    GitHub({
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
+    }),
+  ],
   pages: { signIn: "/login", error: "/login" },
   callbacks: {
     async signIn({ account, profile }) {
