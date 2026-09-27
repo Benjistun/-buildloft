@@ -1,25 +1,19 @@
 # Buildloft – Immobilien Analyzer
 
-Buildloft ist eine Next.js-Webapp zur schnellen Voranalyse von Immobilienangeboten.
+Buildloft läuft als statische Website direkt über GitHub Pages auf **buildloft.de**.
 
 ## Funktionen
 
-- Immobilien-Link von ImmoScout24, Immowelt, Immonet, Kleinanzeigen oder immobilien.de einfügen
-- Eckdaten wie Kaufpreis, Wohnfläche, Zimmer, Baujahr, Hausgeld und Miete automatisch erkennen
-- Bruttomietrendite, Kaufpreisfaktor, Kaufnebenkosten, Finanzierungsrate und Cashflow berechnen
-- Anzeigentext auf Hinweise wie Sonderumlagen, Sanierungsstau, Feuchtigkeit, Erbpacht, Heizungsbedarf, Dach/Fassade, Denkmalschutz und Renovierungsbedarf prüfen
-- Manueller Text-Fallback, falls ein Immobilienportal automatisierte Abrufe blockiert
-- Responsive Oberfläche für Desktop, Tablet und Smartphone
+- Immobilien-Link als Quelle hinterlegen
+- Anzeigentext direkt im Browser analysieren
+- Kaufpreis, Wohnfläche, Zimmer, Baujahr, Hausgeld, Kaltmiete und Energieklasse erkennen
+- Bruttomietrendite und Kaufpreisfaktor berechnen
+- Finanzierung, Kreditrate und monatlichen Cashflow durchspielen
+- Hinweise auf Sonderumlagen, Sanierungsstau, Feuchtigkeit, Erbpacht, Heizung, Dach/Fassade, Denkmalschutz und Renovierungsbedarf markieren
+- Keine Anmeldung, kein Backend und keine Vercel-Abhängigkeit
 
-## Entwicklung
+## Hosting
 
-```bash
-npm install
-npm run dev
-```
+Die Website besteht nur aus `index.html`, `styles.css` und `app.js` und kann direkt von GitHub Pages ausgeliefert werden.
 
-Danach ist die App unter `http://localhost:3000` erreichbar.
-
-## Hinweis
-
-Die Analyse ist eine automatisierte Vorprüfung. Sie ersetzt keine Prüfung von WEG-Protokollen, Teilungserklärung, Rücklagen, Sonderumlagen, Energieausweis, Mietvertrag, Gebäudetechnik, Finanzierung, Steuern oder rechtlichen Fragen.
+> Hinweis: Immobilienportale blockieren häufig das automatische Auslesen ihrer Seiten aus einem Browser. Deshalb wird der Anzeigentext in die Website eingefügt und lokal analysiert.
