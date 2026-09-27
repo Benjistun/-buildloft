@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Buildloft – Immobilienangebote analysieren, Rendite rechnen und Risiken im Anzeigentext erkennen.">
+  <title>Buildloft – Immobilien Analyzer</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="site">
+    <header class="nav">
+      <a class="logo" href="./"><span>B</span>Buildloft</a>
+      <span class="navtag">Immobilien Analyzer</span>
+    </header>
+
+    <section class="hero">
+      <div class="intro">
+        <div class="eyebrow">IMMOBILIEN SCHNELLER VERSTEHEN</div>
+        <h1>Objekt prüfen.<br>Zahlen rechnen.<br><em>Risiken sehen.</em></h1>
+        <p>Füge einen Immobilien-Link und den Text der Anzeige ein. Buildloft erkennt Eckdaten, berechnet Rendite und Finanzierung und markiert mögliche Risiken wie Sonderumlagen, Sanierungsstau, Erbpacht oder Feuchtigkeit.</p>
+      </div>
+
+      <form id="analyzerForm" class="searchcard">
+        <label for="listingUrl">Link zur Anzeige <span class="optional">(optional)</span></label>
+        <input id="listingUrl" class="full-input" type="url" placeholder="https://www.immobilienscout24.de/expose/...">
+        <p class="helper">Der Link wird als Quelle gespeichert. Fremde Immobilienportale blockieren das automatische Auslesen im Browser häufig.</p>
+
+        <label for="listingText">Anzeigentext</label>
+        <textarea id="listingText" rows="10" placeholder="Beschreibung und Eckdaten der Anzeige hier einfügen …"></textarea>
+
+        <div class="actions">
+          <button class="primary" type="submit">Analysieren →</button>
+          <button id="demoButton" class="secondary" type="button">Demo laden</button>
+        </div>
+        <div id="formError" class="error hidden" role="alert"></div>
+      </form>
+    </section>
+
+    <section id="features" class="features">
+      <article><b>01</b><h2>Objektdaten</h2><p>Kaufpreis, Wohnfläche, Zimmer, Baujahr, Hausgeld, Miete und Energieklasse aus dem Text herausziehen.</p></article>
+      <article><b>02</b><h2>Risiko-Scan</h2><p>Sonderumlagen, Sanierungsstau, Erbpacht, Feuchtigkeit, alte Technik und weitere Hinweise sichtbar machen.</p></article>
+      <article><b>03</b><h2>Investment</h2><p>Bruttorendite, Kaufpreisfaktor, Gesamtaufwand, Kreditrate und monatlichen Cashflow durchspielen.</p></article>
+    </section>
+
+    <section id="results" class="results hidden">
+      <div class="resulttop">
+        <div>
+          <div class="eyebrow">ANALYSE</div>
+          <h2 id="resultTitle">Immobilienangebot</h2>
+          <p id="resultSource">Manuell eingefügter Text</p>
+        </div>
+        <span id="qualityBadge" class="confidence">Datenqualität: –</span>
+      </div>
+
+      <div class="stats">
+        <article class="stat strong"><span>Kaufpreis</span><b id="statPrice">—</b></article>
+        <article class="stat"><span>Wohnfläche</span><b id="statArea">—</b></article>
+        <article class="stat"><span>Preis / m²</span><b id="statSqm">—</b></article>
+        <article class="stat"><span>Zimmer</span><b id="statRooms">—</b></article>
+        <article class="stat"><span>Baujahr</span><b id="statYear">—</b></article>
+        <article class="stat"><span>Hausgeld</span><b id="statHouseMoney">—</b></article>
+        <article class="stat"><span>Kaltmiete</span><b id="statRent">—</b></article>
+        <article class="stat"><span>Energieklasse</span><b id="statEnergy">—</b></article>
+      </div>
+
+      <div class="columns">
+        <section class="panel">
+          <div class="panelhead">
+            <div><small>INVESTMENT</small><h3>Finanzierung & Cashflow</h3></div>
+            <span id="cashBadge" class="cash">Miete ergänzen</span>
+          </div>
+
+          <div class="inputs">
+            <label>Eigenkapital<div class="unit"><input id="equity" type="number" min="0" value="30000"><span>€</span></div></label>
+            <label>Kaufnebenkosten<div class="unit"><input id="closing" type="number" min="0" step=".1" value="10.5"><span>%</span></div></label>
+            <label>Sollzins<div class="unit"><input id="interest" type="number" min="0" step=".1" value="3.8"><span>%</span></div></label>
+            <label>Tilgung<div class="unit"><input id="repayment" type="number" min="0" step=".1" value="2"><span>%</span></div></label>
+            <label>Kaltmiete<div class="unit"><input id="rentOverride" type="number" min="0" value=""><span>€</span></div></label>
+            <label>Nicht umlagefähig<div class="unit"><input id="nonRecoverable" type="number" min="0" value="120"><span>€</span></div></label>
+            <label>Instandhaltung<div class="unit"><input id="maintenance" type="number" min="0" value="80"><span>€</span></div></label>
+            <label>Leerstandsreserve<div class="unit"><input id="vacancy" type="number" min="0" max="100" step=".5" value="3"><span>%</span></div></label>
+          </div>
+
+          <div class="calcs">
+            <div><span>Gesamtaufwand</span><b id="calcTotal">—</b></div>
+            <div><span>Kreditbedarf</span><b id="calcLoan">—</b></div>
+            <div><span>Kreditrate</span><b id="calcRate">—</b></div>
+            <div><span>Bruttorendite</span><b id="calcYield">—</b></div>
+            <div><span>Kaufpreisfaktor</span><b id="calcFactor">—</b></div>
+            <div><span>Cashflow</span><b id="calcCashflow">—</b></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panelhead">
+            <div><small>TEXTPRÜFUNG</small><h3>Risiken & Sanierungen</h3></div>
+            <span id="riskCount" class="count">0 Treffer</span>
+          </div>
+          <div id="riskList" class="risks"></div>
+        </section>
+      </div>
+
+      <section class="details">
+        <div><small>WEITERE ANGABEN</small><h3>Erkannte Informationen</h3></div>
+        <dl>
+          <div><dt>Provision</dt><dd id="detailCommission">Nicht erkannt</dd></div>
+          <div><dt>Quelle</dt><dd id="detailSource">Manueller Text</dd></div>
+          <div><dt>Analyse</dt><dd>Direkt im Browser</dd></div>
+        </dl>
+        <p id="preview" class="preview"></p>
+      </section>
+
+      <p class="disclaimer">Automatische Voranalyse, keine Kauf-, Steuer-, Rechts- oder Finanzierungsberatung. WEG-Protokolle, Rücklagen, Sonderumlagen, Energieausweis, Mietvertrag und Gebäudetechnik vor einem Kauf separat prüfen.</p>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
