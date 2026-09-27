@@ -24,17 +24,29 @@
       <form id="analyzerForm" class="searchcard">
         <div class="form-kicker">ANGEBOT ANALYSIEREN</div>
         <h2 class="form-title">Immobilie prüfen</h2>
-        <label for="listingUrl">Link zur Anzeige <span class="optional">(optional)</span></label>
-        <input id="listingUrl" class="full-input" type="url" placeholder="https://www.immobilienscout24.de/expose/...">
-        <p class="helper">Der Link wird als Quelle gespeichert. Fremde Immobilienportale blockieren das automatische Auslesen im Browser häufig.</p>
-
-        <label for="listingText">Anzeigentext</label>
-        <textarea id="listingText" rows="10" placeholder="Beschreibung und Eckdaten der Anzeige hier einfügen …"></textarea>
+        <label for="listingUrl">Link zur Immobilienanzeige</label>
+        <input id="listingUrl" class="full-input" type="url" placeholder="https://www.immobilienscout24.de/expose/..." autocomplete="url">
+        <p class="helper">Nur Link einfügen – Buildloft versucht die Anzeige automatisch auszulesen und zu analysieren.</p>
 
         <div class="actions">
-          <button class="primary" type="submit">Analysieren →</button>
-          <button id="demoButton" class="secondary" type="button">Demo laden</button>
+          <button id="analyzeButton" class="primary" type="submit">Link analysieren →</button>
+          <button id="demoButton" class="secondary" type="button">Demo testen</button>
         </div>
+
+        <div id="loadingBox" class="notice hidden" aria-live="polite">
+          <strong>Anzeige wird geladen …</strong>
+          <span id="loadingText">Daten werden ausgelesen und geprüft.</span>
+        </div>
+
+        <details id="fallbackDetails" class="fallback">
+          <summary>Automatisches Auslesen klappt nicht?</summary>
+          <p>Dann kannst du den Anzeigentext ausnahmsweise manuell einfügen.</p>
+          <label for="listingText">Anzeigentext</label>
+          <textarea id="listingText" rows="9" placeholder="Beschreibung und Eckdaten der Anzeige hier einfügen …"></textarea>
+          <button id="manualAnalyze" class="secondary full-width" type="button">Text analysieren</button>
+        </details>
+
+        <p class="reader-note">Für das automatische Auslesen wird die öffentliche Anzeigen-URL an Jina AI Reader übergeben.</p>
         <div id="formError" class="error hidden" role="alert"></div>
       </form>
     </section>
